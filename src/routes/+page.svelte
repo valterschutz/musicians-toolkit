@@ -49,17 +49,10 @@
 		</button>
 		<div class="flex flex-col items-center gap-4">
 			<input type="number" class="text-2xl p-2 w-[75px]" bind:value={numberOfNums} />
-			<input
-				class="p-2 text-2xl rounded-md"
-				orient="vertical"
-				type="range"
-				min="1"
-				max={notesArr.length}
-				bind:value={numberOfNums}
-			/>
 		</div>
 		<p class="text-3xl text-indigo-100">notes</p>
 	</div>
+	<input type="range" min="1" max={notesArr.length} bind:value={numberOfNums} class="w-full" />
 	<ul class="flex flex-wrap gap-2 w-full">
 		{#each notes as note, idx}
 			<li
@@ -71,13 +64,3 @@
 		{/each}
 	</ul>
 </div>
-
-<style>
-	input[type='range'][orient='vertical'] {
-		writing-mode: vertical-lr;
-		direction: rtl;
-		appearance: slider-vertical;
-		vertical-align: bottom;
-		height: 200px;
-	}
-</style>
