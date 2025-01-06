@@ -5,7 +5,7 @@
 	let { children } = $props();
 </script>
 
-<div class="w-full h-full flex flex-col items-center gap-6">
+<div class="w-full h-full flex flex-col items-center gap-6 p-4">
 	<div class="h-14 w-full flex flex-row justify-around items-center">
 		<a
 			href="notes"
