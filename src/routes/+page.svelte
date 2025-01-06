@@ -4,53 +4,65 @@
 	import { scale, fade } from 'svelte/transition';
 
 	let generatedNums = $state([]);
-	let numberOfNums = $state(5);
+	let numberOfNums = $state(1);
+	let sharpsIncluded = $state(false);
+	let flatsIncluded = $state(false);
 
 	function generateRandomNums() {
 		// Generate 5 random numbers between 1 and 12, with no duplicates
-		generatedNums = _.sampleSize(_.range(1, 13), numberOfNums);
+		generatedNums = _.sampleSize(_.range(1, notesArr.length), numberOfNums);
 	}
 
-	// Map each number 1-12 to a letter
-	const d = {
-		1: 'C',
-		2: 'C#',
-		3: 'D',
-		4: 'D#',
-		5: 'E',
-		6: 'F',
-		7: 'F#',
-		8: 'G',
-		9: 'G#',
-		10: 'A',
-		11: 'A#',
-		12: 'B'
-	};
+	const normalNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+	const flatNotes = ['Db', 'Eb', 'Gb', 'Ab', 'Bb'];
+	const sharpNotes = ['C#', 'D#', 'F#', 'G#', 'A#'];
 
-	const notes = $derived(generatedNums.map((num) => d[num]));
+	// Depending on the user's selection (sharpsIncluded, flatsIncluded), merge the notes arrays
+	const notesArr = $derived(
+		sharpsIncluded && flatsIncluded
+			? [...normalNotes, ...flatNotes, ...sharpNotes]
+			: sharpsIncluded
+				? [...normalNotes, ...sharpNotes]
+				: flatsIncluded
+					? [...normalNotes, ...flatNotes]
+					: normalNotes
+	);
+
+	const notes = $derived(generatedNums.map((num) => notesArr[num]));
 </script>
 
-<div class="w-[332px] flex flex-col items-center gap-6">
-	<div class="w-full flex flex-row justify-between items-center">
+<div class="flex flex-col items-center gap-6 w-[484px] p-2">
+	<div>
+		<label for="flats" class="text-white text-3xl mr-2">Include flats?</label>
+		<input id="flats" type="checkbox" class="size-6" bind:checked={flatsIncluded} />
+	</div>
+	<div>
+		<label for="sharps" class="text-white text-3xl mr-2">Include sharps?</label>
+		<input id="sharps" type="checkbox" class="size-6" bind:checked={sharpsIncluded} />
+	</div>
+	<div class="w-full flex flex-row justify-between items-start gap-4">
 		<button
 			class="hover:bg-teal-600 bg-teal-500 text-white text-3xl p-2 rounded-md cursor-pointer"
 			onclick={generateRandomNums}
 		>
 			Generate
 		</button>
-		<input
-			class="p-2 w-[80px] text-3xl rounded-md"
-			type="number"
-			max="12"
-			bind:value={numberOfNums}
-		/>
+		<div class="flex flex-col items-center">
+			<input type="number" class="text-3xl w-[75px] p-2" bind:value={numberOfNums} />
+			<input
+				class="p-2 w-[200px] text-3xl rounded-md"
+				type="range"
+				min="1"
+				max={notesArr.length}
+				bind:value={numberOfNums}
+			/>
+		</div>
 		<p class="text-3xl text-indigo-100">notes</p>
 	</div>
 	<ul class="flex flex-wrap gap-2 w-full">
 		{#each notes as note, idx}
 			<li
 				class="transition-all rounded-md w-[60px] h-[60px] bg-indigo-700 text-indigo-100 flex justify-center items-center"
-				key={idx}
 				transition:fade
 			>
 				<p class="text-3xl cursor-default">{note}</p>
