@@ -42,7 +42,7 @@
 	</div>
 	<div class="w-full flex flex-row justify-between items-start gap-4">
 		<button
-			class="hover:bg-teal-600 bg-teal-500 text-white text-2xl p-2 rounded-md cursor-pointer"
+			class="hover:bg-teal-600 bg-teal-500 text-white text-2xl p-2 rounded-md cursor-pointer outline-none focus:ring-4 shadow-lg transform active:scale-75 transition-transform"
 			onclick={generateRandomNums}
 		>
 			Generate
@@ -52,7 +52,7 @@
 		</div>
 		<p class="text-3xl text-indigo-100">notes</p>
 	</div>
-	<input type="range" min="1" max={notesArr.length} bind:value={numberOfNums} class="w-full" />
+	<input type="range" min="1" max={notesArr.length} bind:value={numberOfNums} class="w-4/5" />
 	<ul class="flex flex-wrap gap-2 w-full">
 		{#each notes as note, idx}
 			<li
