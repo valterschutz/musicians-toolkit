@@ -36,6 +36,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@fontsource-variable/fredoka": "^5.1.1",
 		"lodash": "^4.17.21"
 	}
 }

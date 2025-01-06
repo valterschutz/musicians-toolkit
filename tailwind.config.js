@@ -3,7 +3,8 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     fontFamily: {
-      'serif': ['Risque']
+      'serif': ['Risque'],
+      'sans': ['Fredoka'],
     },
     extend: {},
   },
