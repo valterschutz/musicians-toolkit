@@ -31,26 +31,27 @@
 	const notes = $derived(generatedNums.map((num) => notesArr[num]));
 </script>
 
-<div class="flex flex-col items-center gap-6 w-[484px] p-2">
+<div class="flex flex-col items-center gap-6 p-2 w-[348px]">
 	<div>
-		<label for="flats" class="text-white text-3xl mr-2">Include flats?</label>
-		<input id="flats" type="checkbox" class="size-6" bind:checked={flatsIncluded} />
+		<label for="flats" class="text-white text-2xl mr-2">Include flats?</label>
+		<input id="flats" type="checkbox" class="size-5" bind:checked={flatsIncluded} />
 	</div>
 	<div>
-		<label for="sharps" class="text-white text-3xl mr-2">Include sharps?</label>
-		<input id="sharps" type="checkbox" class="size-6" bind:checked={sharpsIncluded} />
+		<label for="sharps" class="text-white text-2xl mr-2">Include sharps?</label>
+		<input id="sharps" type="checkbox" class="size-5" bind:checked={sharpsIncluded} />
 	</div>
 	<div class="w-full flex flex-row justify-between items-start gap-4">
 		<button
-			class="hover:bg-teal-600 bg-teal-500 text-white text-3xl p-2 rounded-md cursor-pointer"
+			class="hover:bg-teal-600 bg-teal-500 text-white text-2xl p-2 rounded-md cursor-pointer"
 			onclick={generateRandomNums}
 		>
 			Generate
 		</button>
-		<div class="flex flex-col items-center">
-			<input type="number" class="text-3xl w-[75px] p-2" bind:value={numberOfNums} />
+		<div class="flex flex-col items-center gap-4">
+			<input type="number" class="text-2xl p-2 w-[75px]" bind:value={numberOfNums} />
 			<input
-				class="p-2 w-[200px] text-3xl rounded-md"
+				class="p-2 text-2xl rounded-md"
+				orient="vertical"
 				type="range"
 				min="1"
 				max={notesArr.length}
@@ -70,3 +71,13 @@
 		{/each}
 	</ul>
 </div>
+
+<style>
+	input[type='range'][orient='vertical'] {
+		writing-mode: vertical-lr;
+		direction: rtl;
+		appearance: slider-vertical;
+		vertical-align: bottom;
+		height: 200px;
+	}
+</style>
