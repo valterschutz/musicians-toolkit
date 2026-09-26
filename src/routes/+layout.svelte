@@ -21,6 +21,13 @@
 			class:text-teal-200={selected === 'chords'}
 			onclick={() => (selected = 'chords')}>Chords</a
 		>
+		<a
+			href="violin-fingerboard"
+			class="text-3xl text-center font-bold font-sans underline"
+			class:text-white={selected !== 'violin-fingerboard'}
+			class:text-teal-200={selected === 'violin-fingerboard'}
+			onclick={() => (selected = 'violin-fingerboard')}>Violin fingerboard</a
+		>
 	</div>
 	{@render children()}
 </div>
